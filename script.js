@@ -3,9 +3,9 @@ function displayArticleInfo() {
 const apiKey = "weSjq5aQvWOq7OaZI3s7atADMIqekIme";
 var articleURLcomm = "";
 var searchTerms = $("#search").text();
-var startDate = $("$#startDate").text();
-var endDate = $("$#endDate").text();
-var records = $("$#records").text();
+var startDate = $("#startDate").text();
+var endDate = $("#endDate").text();
+var records = $("#records").text();
 var articleInfo = "";
 var queryURLcomm = "https://api.nytimes.com/svc/community/v3/user-content/url.json?api-key=" + apiKey +"&offset=0&url=" + articleURLcomm;
 var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=" + startDate +"&end_date=" + endDate + "&q=" + searchTerms + "&api-key=" + apiKey;
