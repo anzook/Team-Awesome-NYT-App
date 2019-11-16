@@ -2,9 +2,10 @@
 function displayArticleInfo() {
 const apiKey = "weSjq5aQvWOq7OaZI3s7atADMIqekIme";
 var articleURLcomm = "";
-var searchTerms = "Dog";
-var startDate = "20120101";
-var endDate = "20140101";
+var searchTerms = $("#search").text();
+var startDate = $("$#startDate").text();
+var endDate = $("$#endDate").text();
+var records = $("$#records").text();
 var articleInfo = "";
 var queryURLcomm = "https://api.nytimes.com/svc/community/v3/user-content/url.json?api-key=" + apiKey +"&offset=0&url=" + articleURLcomm;
 var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=" + startDate +"&end_date=" + endDate + "&q=" + searchTerms + "&api-key=" + apiKey;
@@ -15,15 +16,18 @@ var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_d
     method: "GET"
   }).then(function(response) {
     console.log(response);
-for (var i = 0; i<response.response.docs.length; i++ ) {
+for (var i = 0; i<records; i++ ) {
   let newArticle = $("<div>");
   let newArticleTitle = response.response.docs[i].headline.main;
   let newArticleAbs = response.response.docs[i].abstract;
 
+  newArticle.append( $("<h2>").text("Title: " + newArticleTitle));
+  newArticle.append("<br />");
+
 }
     
 
-    newMovie.append( $("<h2>").text("Title: " + movTitle));
+   
     newMovie.append("<br />");
     let movPoster = $('<img id="dynamic">').attr("src", response.Poster);
     newMovie.append(movPoster);
@@ -35,8 +39,11 @@ for (var i = 0; i<response.response.docs.length; i++ ) {
   });
 
 }
-displayArticleInfo();
 
+$("#submit").on("click", function(event) {
+  event.preventDefault();
+displayArticleInfo();
+});
     
     // // debugger;
     //   var newList = $("<ul>")
@@ -78,8 +85,7 @@ displayArticleInfo();
 // }
 
 // // This function handles events where the add movie button is clicked
-// $("#add-movie").on("click", function(event) {
-//   event.preventDefault();
+
 //   // This line of code will grab the input from the textbox
 //   var movie = $("#movie-input").val().trim();
 
