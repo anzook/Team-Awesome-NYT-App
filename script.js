@@ -2,10 +2,11 @@
 function displayArticleInfo() {
 const apiKey = "weSjq5aQvWOq7OaZI3s7atADMIqekIme";
 var articleURLcomm = "";
-var searchTerms = $("#search").text();
-var startDate = $("#startDate").text();
-var endDate = $("#endDate").text();
-var records = $("#records").text();
+var searchTerms = $("#search").val().trim();
+var startDate = $("#startDate").val().trim();
+var endDate = $("#endDate").val().trim();
+var records = $("#records").val().trim();
+console.log(startDate);
 var articleInfo = "";
 var queryURLcomm = "https://api.nytimes.com/svc/community/v3/user-content/url.json?api-key=" + apiKey +"&offset=0&url=" + articleURLcomm;
 var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=" + startDate +"&end_date=" + endDate + "&q=" + searchTerms + "&api-key=" + apiKey;
@@ -23,18 +24,10 @@ for (var i = 0; i<records; i++ ) {
 
   newArticle.append( $("<h2>").text("Title: " + newArticleTitle));
   newArticle.append("<br />");
+  newArticle.append( $("<p>").text( newArticleAbs));
+$("article-constiner").append(newArticle);
 
 }
-    
-
-   
-    newMovie.append("<br />");
-    let movPoster = $('<img id="dynamic">').attr("src", response.Poster);
-    newMovie.append(movPoster);
-    newMovie.append( $("<h4>").text( "Rated: " + response.Rated));
-    newMovie.append( $("<p>").text( "Plot: " + response.Plot));
-
-
 
   });
 
@@ -43,6 +36,11 @@ for (var i = 0; i<records; i++ ) {
 $("#submit").on("click", function(event) {
   event.preventDefault();
 displayArticleInfo();
+});
+
+$("#reset").on("click", function(event) {
+  event.preventDefault();
+$("#article-constiner").clear();
 });
     
     // // debugger;
