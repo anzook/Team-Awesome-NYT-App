@@ -5,7 +5,7 @@ var articleURLcomm = "";
 var searchTerms = $("#search").val().trim();
 var startDate = $("#startDate").val().trim();
 var endDate = $("#endDate").val().trim();
-var records = $("#records").val().trim();
+var records = parseInt($("#records").val().trim());
 console.log(startDate);
 var articleInfo = "";
 var queryURLcomm = "https://api.nytimes.com/svc/community/v3/user-content/url.json?api-key=" + apiKey +"&offset=0&url=" + articleURLcomm;
@@ -17,7 +17,7 @@ var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_d
     method: "GET"
   }).then(function(response) {
     console.log(response);
-for (var i = 0; i<records; i++ ) {
+for (var i = 0; i<5; i++ ) {
   let newArticle = $("<div>");
   let newArticleTitle = response.response.docs[i].headline.main;
   let newArticleAbs = response.response.docs[i].abstract;
@@ -25,7 +25,7 @@ for (var i = 0; i<records; i++ ) {
   newArticle.append( $("<h2>").text("Title: " + newArticleTitle));
   newArticle.append("<br />");
   newArticle.append( $("<p>").text( newArticleAbs));
-$("article-constiner").append(newArticle);
+$("#article-container").append(newArticle);
 
 }
 
@@ -40,7 +40,7 @@ displayArticleInfo();
 
 $("#reset").on("click", function(event) {
   event.preventDefault();
-$("#article-constiner").clear();
+$("#article-container").clear();
 });
     
     // // debugger;
